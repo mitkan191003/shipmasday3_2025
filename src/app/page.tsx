@@ -89,14 +89,17 @@ export default function Home() {
       )}
 
       {state === 'display' && (
-        <div style={{
-          background: 'var(--bg-surface)',
-          borderRadius: '24px',
-          border: '1px solid var(--border-subtle)',
-          boxShadow: '0 0 60px rgba(125, 211, 252, 0.1)',
-          width: '95%',
-          maxWidth: '650px',
-        }}>
+        <div 
+          className="snowflake-display-wrapper"
+          style={{
+            background: 'var(--bg-surface)',
+            borderRadius: '24px',
+            border: '1px solid var(--border-subtle)',
+            boxShadow: '0 0 60px rgba(125, 211, 252, 0.1)',
+            width: '95%',
+            position: 'relative',
+          }}
+        >
           <SnowflakeDisplay hash={hash} onReset={handleReset} />
         </div>
       )}
