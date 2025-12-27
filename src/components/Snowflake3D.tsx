@@ -1,10 +1,11 @@
 'use client';
 
-import { useRef, useMemo, useState, useEffect } from 'react';
+import { useRef, useMemo, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Environment, Float } from '@react-three/drei';
 import * as THREE from 'three';
 import { hashToParams } from '@/lib/hash';
+import type { ReactNode } from 'react';
 
 interface Snowflake3DProps {
   hash: string;
@@ -149,7 +150,7 @@ function AnimatedSphere({
 }: {
   position: THREE.Vector3;
   radius: number;
-  material: JSX.Element;
+  material: ReactNode;
   delay: number;
   duration: number;
   growthTime: number;
@@ -221,7 +222,7 @@ function SnowflakeMesh({ hash, onStageChange }: { hash: string; onStageChange?: 
   );
 
   const branches = useMemo(() => {
-    const elements: JSX.Element[] = [];
+    const elements: ReactNode[] = [];
     const t = params.mainThickness * 0.5;
     const center = new THREE.Vector3(0, 0, 0);
     const rad = (deg: number) => (deg * Math.PI) / 180;
@@ -381,7 +382,7 @@ function SnowflakeMesh({ hash, onStageChange }: { hash: string; onStageChange?: 
       ));
     }
     
-    const hexElements: JSX.Element[] = [];
+    const hexElements: ReactNode[] = [];
     for (let i = 0; i < 6; i++) {
       const next = (i + 1) % 6;
       hexElements.push(
