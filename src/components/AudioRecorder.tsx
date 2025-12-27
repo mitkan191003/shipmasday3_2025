@@ -24,6 +24,11 @@ export default function AudioRecorder({ onComplete, onCancel }: AudioRecorderPro
 
     const startRecording = async () => {
       try {
+        // Check if mediaDevices API is available (requires secure context - HTTPS)
+        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+          throw new Error('INSECURE_CONTEXT');
+        }
+
         stream = await navigator.mediaDevices.getUserMedia({ audio: true });
         
         const mediaRecorder = new MediaRecorder(stream);
@@ -74,11 +79,20 @@ export default function AudioRecorder({ onComplete, onCancel }: AudioRecorderPro
       } catch (err) {
         console.error('Microphone access error:', err);
         setStatus('error');
-        setErrorMessage(
-          err instanceof Error && err.name === 'NotAllowedError'
-            ? 'Microphone permission denied. Please allow access and try again.'
-            : 'Could not access microphone. Please check your device settings.'
-        );
+        
+        let message = 'Could not access microphone. Please check your device settings.';
+        
+        if (err instanceof Error) {
+          if (err.message === 'INSECURE_CONTEXT') {
+            message = 'Microphone access requires HTTPS. Please use a secure connection or try the touch/cursor option instead.';
+          } else if (err.name === 'NotAllowedError') {
+            message = 'Microphone permission denied. Please allow access and try again.';
+          } else if (err.name === 'NotFoundError') {
+            message = 'No microphone found. Please connect a microphone or try the touch/cursor option.';
+          }
+        }
+        
+        setErrorMessage(message);
       }
     };
 

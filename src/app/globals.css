@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 @font-face {
-  font-family: 'Cormorant Garamond';
+  font-family: 'DM Sans';
   font-style: normal;
-  font-weight: 300 700;
+  font-weight: 400 700;
   font-display: swap;
-  src: url('https://fonts.gstatic.com/s/cormorantgaramond/v16/co3YmX5slCNuHLi8bLeY9MK7whWMhyjYqXtK.woff2') format('woff2');
+  src: url('https://fonts.gstatic.com/s/dmsans/v14/rP2Hp2ywxg089UriCZOIHTWEBlw.woff2') format('woff2');
 }
 
 :root {
@@ -41,7 +41,8 @@ html, body {
 body {
   background: var(--bg-deep);
   color: var(--text-primary);
-  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+  font-weight: 500;
   position: relative;
 }
 
@@ -229,6 +230,8 @@ body::before {
   border-radius: 24px;
   cursor: crosshair;
   overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .cursor-trail {

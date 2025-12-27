@@ -77,10 +77,14 @@ export default function CursorTracker({ onComplete, onCancel }: CursorTrackerPro
 
   const handleMouseMove = useCallback((e: React.MouseEvent) => {
     if (!isTracking) return;
+    e.preventDefault();
     handleMove(e.clientX, e.clientY);
   }, [isTracking, handleMove]);
 
-  const handleMouseDown = () => setIsTracking(true);
+  const handleMouseDown = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsTracking(true);
+  };
   const handleMouseUp = () => setIsTracking(false);
   const handleMouseLeave = () => setIsTracking(false);
 
@@ -92,6 +96,8 @@ export default function CursorTracker({ onComplete, onCancel }: CursorTrackerPro
       gap: '2rem',
       padding: '2rem',
       width: '100%',
+      userSelect: 'none',
+      WebkitUserSelect: 'none',
     }}>
       <div style={{ textAlign: 'center' }}>
         <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>

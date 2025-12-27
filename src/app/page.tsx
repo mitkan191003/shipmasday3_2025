@@ -104,13 +104,15 @@ export default function Home() {
       {/* Footer */}
       <footer style={{
         position: 'fixed',
-        bottom: '1rem',
+        bottom: 0,
         left: 0,
         right: 0,
         textAlign: 'center',
         color: 'var(--text-muted)',
         fontSize: '0.85rem',
-        zIndex: 0,
+        zIndex: 50,
+        padding: '1rem',
+        background: 'linear-gradient(to top, var(--bg-deep) 0%, var(--bg-deep) 60%, transparent 100%)',
       }}>
         Each snowflake is unique, just like you
       </footer>

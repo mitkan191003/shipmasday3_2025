@@ -28,10 +28,16 @@ export default function TouchTracker({ onComplete, onCancel }: TouchTrackerProps
   const positionsRef = useRef<Position[]>([]);
   const tapIdRef = useRef(0);
   const zoneRef = useRef<HTMLDivElement>(null);
+  const lastTapTimeRef = useRef(0);
 
-  const handleTap = useCallback(async (clientX: number, clientY: number) => {
+  const handleTap = useCallback(async (clientX: number, clientY: number, isTouch: boolean) => {
     if (!zoneRef.current) return;
     if (taps.length >= TAPS_REQUIRED) return;
+
+    // Debounce to prevent double-firing from touch + click
+    const now = Date.now();
+    if (now - lastTapTimeRef.current < 100) return;
+    lastTapTimeRef.current = now;
 
     const rect = zoneRef.current.getBoundingClientRect();
     const x = clientX - rect.left;
@@ -42,7 +48,6 @@ export default function TouchTracker({ onComplete, onCancel }: TouchTrackerProps
 
     const normalizedX = x / rect.width;
     const normalizedY = y / rect.height;
-    const now = Date.now();
 
     // Add position for entropy
     positionsRef.current.push({ x: normalizedX, y: normalizedY, t: now });
@@ -67,12 +72,13 @@ export default function TouchTracker({ onComplete, onCancel }: TouchTrackerProps
     e.preventDefault();
     const touch = e.touches[0];
     if (touch) {
-      handleTap(touch.clientX, touch.clientY);
+      handleTap(touch.clientX, touch.clientY, true);
     }
   }, [handleTap]);
 
   const handleClick = useCallback((e: React.MouseEvent) => {
-    handleTap(e.clientX, e.clientY);
+    // Only handle click if it's not from a touch event (for desktop)
+    handleTap(e.clientX, e.clientY, false);
   }, [handleTap]);
 
   const progress = taps.length / TAPS_REQUIRED;
