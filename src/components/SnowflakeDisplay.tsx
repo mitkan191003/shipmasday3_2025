@@ -101,9 +101,9 @@ function InfoModal({ onClose }: { onClose: () => void }) {
             </h3>
             <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7 }}>
               Your input creates <strong>entropy</strong>-random, unpredictable data. Audio recordings 
-              capture the unique waveforms of sound (including background noise). Cursor movements 
+              capture the unique waveforms of sound. Cursor movements 
               track the precise X/Y coordinates and timing of your path. Touch inputs record tap 
-              positions and millisecond timestamps. This raw chaos becomes the seed of your snowflake.
+              positions and millisecond timestamps. This chaos becomes the seed of your snowflake.
             </p>
           </section>
 
@@ -185,8 +185,7 @@ function InfoModal({ onClose }: { onClose: () => void }) {
               fontStyle: 'italic',
               margin: 0,
             }}>
-              "No two snowflakes are alike" - and with 2<sup>256</sup> possibilities 
-              (more than atoms in the observable universe), neither are yours.
+              "No two snowflakes are alike" - and with 2<sup>256</sup> possibilities, neither are yours.
             </p>
           </div>
         </div>
