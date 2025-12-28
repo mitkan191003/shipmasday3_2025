@@ -421,9 +421,8 @@ export default function Snowflake3D({ hash, onStageChange }: Snowflake3DProps) {
     <div 
       style={{ 
         width: '100%', 
-        height: '300px',
+        height: '100%',
       }}
-      className="snowflake-3d-container"
     >
       <Canvas
         camera={{ position: [0, 5, 5], fov: 40 }}

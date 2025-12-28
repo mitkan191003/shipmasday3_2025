@@ -9,7 +9,6 @@ const Snowflake3D = dynamic(() => import('./Snowflake3D'), {
   loading: () => (
     <div style={{
       width: '100%',
-      height: '350px',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -326,20 +325,24 @@ export default function SnowflakeDisplay({ hash, onReset }: SnowflakeDisplayProp
       </div>
 
       {/* 3D Snowflake */}
-      <div style={{
-        width: '100%',
-        borderRadius: '16px',
-        overflow: 'hidden',
-        background: 'radial-gradient(ellipse at center, rgba(125, 211, 252, 0.1) 0%, transparent 70%)',
-        position: 'relative',
-      }}>
+      <div 
+        className="snowflake-3d-container"
+        style={{
+          width: '100%',
+          borderRadius: '16px',
+          overflow: 'hidden',
+          background: 'radial-gradient(ellipse at center, rgba(125, 211, 252, 0.1) 0%, transparent 70%)',
+          position: 'relative',
+        }}
+      >
         <Suspense fallback={
           <div style={{
             width: '100%',
-            height: '350px',
+            height: '100%',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
+            color: 'var(--text-muted)',
           }}>
             Crystallizing...
           </div>
